@@ -1,23 +1,33 @@
-import React, { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { ModalContext } from '../../context/Modal';
 import { PomodoroContext } from '../../context/Pomodoro';
 import { TypeButton } from '../../util/enum';
 import { TimesPomodoro } from '../../util/types';
 import { Input } from '../Input';
-import { getTime, handleBlur, onlyInputNumber } from './Modal.helpers';
+import { getTime, handleBlur } from './Modal.helpers';
 
 export const Modal = () => {
   const { openModal, setOpenModal } = useContext(ModalContext);
-  const { currentValuesTimes, handleChangeTimesPomodoro, setTypeButton } =
+  const { currentValuesTimes, handleChangeTimesPomodoro } =
     useContext(PomodoroContext);
   const { setValue, getValues } = useForm();
 
   const handleSave = () => {
+    const pomodoro =
+      Number(getValues('pomodoro')) * 60 || currentValuesTimes.pomodoro;
+    const shortBreak =
+      Number(getValues('shortBreak')) * 60 || currentValuesTimes.shortBreak;
+    const longBreak =
+      Number(getValues('longBreak')) * 60 || currentValuesTimes.longBreak;
+
+    const volume = Number(getValues('volume')) || currentValuesTimes.volume;
+
     const newObject: TimesPomodoro = {
-      pomodoro: Number(getValues('pomodoro')) * 60,
-      shortBreak: Number(getValues('shortBreak')) * 60,
-      longBreak: Number(getValues('longBreak')) * 60,
+      pomodoro,
+      shortBreak,
+      longBreak,
+      volume,
     };
 
     handleChangeTimesPomodoro(newObject);
@@ -48,10 +58,10 @@ export const Modal = () => {
                               setValue('pomodoro', event.target.value)
                             }
                             label="Pomodoro"
-                            onKeyPress={onlyInputNumber}
-                            onBlur={handleBlur}
-                            type="text"
-                            maxLength={2}
+                            onBlur={event =>
+                              handleBlur(event, setValue, 'pomodoro')
+                            }
+                            type="number"
                             defaultValue={getTime(currentValuesTimes?.pomodoro)}
                           />
                         </div>
@@ -61,10 +71,10 @@ export const Modal = () => {
                               setValue('shortBreak', event.target.value)
                             }
                             label="Pausa curta"
-                            onKeyPress={onlyInputNumber}
-                            onBlur={handleBlur}
-                            type="text"
-                            maxLength={2}
+                            onBlur={event =>
+                              handleBlur(event, setValue, 'shortBreak')
+                            }
+                            type="number"
                             defaultValue={getTime(
                               currentValuesTimes?.shortBreak,
                             )}
@@ -76,13 +86,27 @@ export const Modal = () => {
                               setValue('longBreak', event.target.value)
                             }
                             label="Pausa longa"
-                            onKeyPress={onlyInputNumber}
-                            onBlur={handleBlur}
-                            type="text"
-                            maxLength={2}
+                            onBlur={event =>
+                              handleBlur(event, setValue, 'longBreak')
+                            }
+                            type="number"
                             defaultValue={getTime(
                               currentValuesTimes?.longBreak,
                             )}
+                          />
+                        </div>
+                        <div className="mb-3 xl:w-96">
+                          <input
+                            id="default-range"
+                            type="range"
+                            defaultValue={currentValuesTimes?.volume * 100}
+                            onChange={event => {
+                              setValue(
+                                'volume',
+                                Math.floor(Number(event.target.value)) / 100,
+                              );
+                            }}
+                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                           />
                         </div>
                       </div>

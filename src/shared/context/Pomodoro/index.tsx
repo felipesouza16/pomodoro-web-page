@@ -19,6 +19,7 @@ const INITIAL_STATE_TIMES_POMODORO: TimesPomodoro = {
   pomodoro: 1500,
   shortBreak: 300,
   longBreak: 600,
+  volume: 0.01,
 };
 
 export const PomodoroContext = createContext({} as PomodoroContextProps);

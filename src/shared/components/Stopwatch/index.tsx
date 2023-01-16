@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { PomodoroContext } from '../../context/Pomodoro';
 import { TypeButton } from '../../util/enum';
 import { verifyColor } from '../../util/verify';
+import AlarmClock from '../../../assets/sounds/alarmclock.mp3';
+import { Howl } from 'howler';
 
 export const Stopwatch = () => {
   const { typeButton, setTypeButton, currentValuesTimes } =
@@ -10,6 +12,11 @@ export const Stopwatch = () => {
   const [isRunning, setIsRunning] = useState(false);
   const text =
     'O relógio está correndo!\nCaso confirme a contagem será resetada.\nDeseja trocar de contagem?';
+
+  const soundPlay = (src: string) => {
+    const sound = new Howl({ src, volume: currentValuesTimes.volume });
+    sound.play();
+  };
 
   const setCurrentTime = () => {
     switch (typeButton) {
@@ -32,6 +39,7 @@ export const Stopwatch = () => {
         if (time === 0) {
           setCurrentTime();
           handleStop();
+          soundPlay(AlarmClock);
           return;
         }
         setTime(previous => previous - 1);
