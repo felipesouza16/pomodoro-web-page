@@ -1,4 +1,5 @@
 {
+  "homepage": "https://felipesouza16.github.io/pomodoro-web-page",
   "name": "pomodoro-web-page",
   "private": true,
   "version": "0.0.0",
@@ -6,7 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -22,6 +25,7 @@
     "autoprefixer": "^10.4.13",
     "eslint": "^8.29.0",
     "eslint-plugin-react": "^7.31.11",
+    "gh-pages": "^4.0.0",
     "postcss": "^8.4.20",
     "tailwindcss": "^3.2.4",
     "typescript": "^4.9.3",
