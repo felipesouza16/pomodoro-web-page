@@ -96,6 +96,9 @@ export const Modal = () => {
                           />
                         </div>
                         <div className="mb-3 xl:w-96">
+                          <label className="form-label inline-block mb-2 text-gray-700">
+                            Volume
+                          </label>
                           <input
                             id="default-range"
                             type="range"
