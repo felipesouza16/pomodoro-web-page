@@ -10,7 +10,7 @@ export const Header = () => {
 
   return (
     <div className="flex justify-evenly items-center px-2 py-2 z-10">
-      <a href="/">
+      <a href="/pomodoro-web-page">
         <img
           className="w-8 h-8 md:w-14 md:h-14"
           src="https://user-images.githubusercontent.com/86385745/207751154-d4cb9b6a-1bf8-41e9-a66c-12f17ff04140.png"
