@@ -2,11 +2,11 @@
 
 O projeto se trata de um método de gerenciamento de tempo para diversas tarefas.
 
-![pomodoro](https://user-images.githubusercontent.com/86385745/212727260-7986cd69-9b53-4323-9ff5-e68f17b99fa1.gif)
+![pomodoro-1](https://user-images.githubusercontent.com/86385745/212768841-3366f7a0-bfee-4a65-bbaf-d496d485e8f1.gif)
 
 ## Stack utilizada
 
-**Front-end:** Vite, React Context, TailwindCSS, React-Hook-Form
+**Front-end:** Vite, React Context, TailwindCSS, React-Hook-Form, HowlerJS
 
 ## Rodando localmente
 
